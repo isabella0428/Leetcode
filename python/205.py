@@ -1,0 +1,13 @@
+class Solution(object):
+    def isIsomorphic(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        return len(set(zip(s, t))) == len(set(s)) == len(set(t))
+
+
+if __name__ == "__main__":
+    a = Solution()
+    print(a.isIsomorphic("ab", "aa"))
