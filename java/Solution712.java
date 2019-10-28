@@ -1,7 +1,7 @@
 import java.util.*;
 
 class Solution712 {
-    /*
+    /***
         Problem discription:    
         Delete characters in two Strings to make the strings match
         Return the smallest ASCII sum
