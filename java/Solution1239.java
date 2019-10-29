@@ -59,14 +59,6 @@ class Solution1239 {
         }
     }
 
-    public static void printCount(int [] count)
-    {
-        for(int i = 0; i < 26; ++i) {
-            System.out.print(count[i]);
-        }
-        System.out.println();
-    }
-
     public static void main(String ... args) {
         List<String> input = new ArrayList<>();
         input.add("cha");
