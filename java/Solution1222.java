@@ -12,34 +12,37 @@ class Solution1222 {
 
         queens = BubbleSort(queens, king);
 
+        // for (int i = 0; i < queens.length; ++i) {
+        //     if (blocked_rows.contains(queens[i][0]))
+        //         continue;
+        //     if (blocked_cols.contains(queens[i][1]))
+        //         continue;
+
+        //     if (abs(queens[i][0] - king[0]) == abs(queens[i][1] - king[1]))
+        //         if ((queens[i][0] - king[0] > 0 && l == 0) || (queens[i][0] - kings[0] < 0 || l != 0))
+        //             if ((queens[i][1] - king[1] > 0 && h == 1) || (queens[i][1] - kings[1] < 0 || h == 0)) {
+        //                 result.push(queens[i]);
+        //                 blocked_cols.add(queens[i][1]);
+        //                 blocked_rows.add(queens[i][0]);
+        //                 continue;
+        //             }
+
+        //     if (queens[i][0] == king[0]) {
+        //         result.push(queens[i]);
+        //         blocked_cols.add(queens[i][1]);
+        //         blocked_rows.add(queens[i][0]);
+        //         continue;
+        //     }
+
+        //     if (queens[i][1] == king[1]) {
+        //         result.push(queens[i]);
+        //         blocked_cols.add(queens[i][1]);
+        //         blocked_rows.add(queens[i][0]);
+        //     }
+        //     return result;
         for (int i = 0; i < queens.length; ++i) {
-            if (blocked_rows.contains(queens[i][0]))
-                continue;
-            if (blocked_cols.contains(queens[i][1]))
-                continue;
-
-            if (abs(queens[i][0] - king[0]) == abs(queens[i][1] - king[1]))
-                if ((queens[i][0] - king[0] > 0 && l == 0) || (queens[i][0] - kings[0] < 0 || l != 0))
-                    if ((queens[i][1] - king[1] > 0 && h == 1) || (queens[i][1] - kings[1] < 0 || h == 0)) {
-                        result.push(queens[i]);
-                        blocked_cols.add(queens[i][1]);
-                        blocked_rows.add(queens[i][0]);
-                        continue;
-                    }
-
-            if (queens[i][0] == king[0]) {
-                result.push(queens[i]);
-                blocked_cols.add(queens[i][1]);
-                blocked_rows.add(queens[i][0]);
-                continue;
-            }
-
-            if (queens[i][1] == king[1]) {
-                result.push(queens[i]);
-                blocked_cols.add(queens[i][1]);
-                blocked_rows.add(queens[i][0]);
-            }
-            return result;
+            System.out.print(queens[i][0]);
+            System.out.print(queens[i][1]);
         }
     }
 
