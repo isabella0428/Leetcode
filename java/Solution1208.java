@@ -1,4 +1,5 @@
 class Solution1208 {
+    /* Sliding window problem */
     public int equalSubstring(String s, String t, int maxCost) {
         int current_cost = 0;
         int current_length = 0;
