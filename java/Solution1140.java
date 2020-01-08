@@ -12,7 +12,7 @@ class Solution1140 {
             int m = (l - i + 1) / 2;
             dp[i][m] = piles[i];
             while(--m > 0) {
-                for(int x = 1; x <= 2 * m && i +x < l; ++x){
+                for(int x = 1; x <= 2 * m && i + x < l; ++x){
                     int mx = Math.min(Math.max(m, x), (l - i - x + 1) / 2);
                     dp[i][m] = Math.max(dp[i][m], piles[i] - dp[i + x][mx]);
                 }
