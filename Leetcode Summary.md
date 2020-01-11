@@ -1,5 +1,9 @@
 ## Leetcode Summary
 
+References： Leetcode Discussions
+
+
+
 #### 最长子序列问题
 
 这种问题的主要思路是采用滑动窗口的方法
@@ -116,6 +120,68 @@ class Solution3 {
             begin++;
         }
         return maxL;
+    }
+}
+```
+
+
+
+#### Problems with Tag Array
+
+120. Triangle
+
+给定一个三角形，求从顶端走到最下面的最小路径和（每次只能走相邻的节点）
+
+```java
+		 [2],
+    [3,4],
+   [6,5,7],
+  [4,1,8,3]
+```
+
+##### 思路
+
+观察到这里每两个相邻节点都共享一个branch，这样我们就有了overlapping subproblem
+
+在这里top-down dp会出现一些问题，我们至少需要保存🌲的大小那么大的空间（memorization可以减小空间需求）
+
+在这里bottom-up dp会更好一些
+
+```java
+minpath[k][i] = min( minpath[k+1][i], minpath[k+1][i+1]) + triangle[k][i];
+```
+
+Or even better, since the row minpath[k+1] would be useless after minpath[k] is computed, we can simply set minpath as a 1D array, and iteratively update itself:
+
+这里从左边开始更新，因为如果从右边开始更新的话，那么minpath[j + 1]已经被更新过，是第i行的数值（需要的是i+1行的数值），minpath[j]是第i+1行的数值，无法进行以下操作
+
+```java
+For the kth level:
+minpath[i] = min( minpath[i], minpath[i+1]) + triangle[k][i]; 
+```
+
+
+
+##### 1D方法：
+
+```java
+import java.util.*;
+
+class Solution120 {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int row = triangle.size();
+        int dp[] = new int[triangle.get(row - 1).size()];
+        
+        for(int j = 0; j < triangle.get(row - 1).size(); ++j) {
+            dp[j] = triangle.get(row - 1).get(j);
+        }
+        
+        for(int i = row - 2; i >= 0; --i) {
+            for(int j = 0; j <= i; ++j) {
+                dp[j] = Math.min(dp[j],dp[j + 1]) + triangle.get(i).get(j);
+            }
+        }
+        return dp[0];
     }
 }
 ```
