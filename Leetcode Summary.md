@@ -126,9 +126,7 @@ class Solution3 {
 
 
 
-#### Problems with Tag Array
-
-120. Triangle
+#### 120. Triangle(DP Problems)
 
 给定一个三角形，求从顶端走到最下面的最小路径和（每次只能走相邻的节点）
 
@@ -185,4 +183,66 @@ class Solution120 {
     }
 }
 ```
+
+
+
+#### 870. Advantage Shuffle
+
+找到一个A的permutation，使得A[i] > B[i]的个数最多（A和B长度相等）
+
+##### 思路：
+
+由于选取刚刚超过B[i]的A[i]可以让A beat B的个数更有可能更多，因此这里其实是个Greedy问题。在每一步，我们都选取正好大于B[i]的A中元素与之对应
+
+##### 细节考虑：
+
+1. 由于在B中可能有相同元素，因此我们不能直接简单的保存一个Map<Integer, Integer>，后面的Key会覆盖前面的Key（这里可以使用Deque，FIFO）
+2. 在找对应元素的时候，应该遍历A，寻找正好大于B中元素的值，否则要判断边界
+3. 在复制数组的时候需要考虑是浅拷贝（没有创建新的对象，=）还是深拷贝（创建新的对象，clone）
+
+
+
+```java
+import java.util.*;
+
+class Solution870 {
+	public int[] advantageCount(int[] A, int[] B) {
+		int[] sortedA = A.clone();
+    Arrays.sort(sortedA);
+    int[] sortedB = B.clone();
+    Arrays.sort(sortedB);
+    
+    // Stores the sortedB's corresponding sortedA values
+    Map<Integer, Deque<Integer>> map = new HashMap<>();
+    // Stores the remaining sortedA values
+    Deque<Integer> remaining = new LinkedList<>();
+    
+    for(int b: sortedB)
+    	map.put(b, new LinkedList());
+      
+    int b = 0;	// index of which we have beated
+    for(int a : sortedA) {
+      if(a > sortedB[b]) {
+        map.get(sortedB[b++]).add(a);
+      } else {
+        remaining.add(a);
+      }
+    }
+    
+    int[] res = new int[A.length];
+    for(int i = 0; i < A.length; ++i) {
+      if(map.get(B[i]).size() != 0) {
+        res[i] = map.get(B[i]).pop();
+      } else {
+        res[i] = remaining.pop();
+      }
+    }
+    return res;
+	}
+}
+```
+
+
+
+#### 542. 01Matrix(BFS, DP)
 
